@@ -1,18 +1,16 @@
 <template>
   <div>
+    <router-link to="/NaviBar">NaviBar</router-link>
     <TopFront />
-    <NaviBar />
   </div>
 </template>
 
 <script>
 import TopFront from "@/view/TopFront.vue"
-import NaviBar from "@/components/naviBar.vue"
 
 export default {
   components: {
     TopFront,
-    NaviBar,
   },
 }
 </script>
