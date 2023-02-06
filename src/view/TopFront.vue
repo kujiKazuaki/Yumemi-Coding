@@ -1,26 +1,17 @@
 <template>
   <div>
     <div>都道府県別の総人口推移グラフ</div>
-    <div>
-      <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+    <div class="barChart">
+      <Bar :options="chartOptions" :data="chartData" />
     </div>
   </div>
 </template>
 
 <script>
-// import { url_demographics } from "@/plugins/demo.js"
 import { Bar } from "vue-chartjs"
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js"
+import { Chart as ChartJS, registerables } from "chart.js"
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(...registerables)
 
 export default {
   name: "BarChart",
@@ -42,3 +33,9 @@ export default {
   },
 }
 </script>
+
+<style scope>
+.barChart {
+  width: 110%;
+}
+</style>
