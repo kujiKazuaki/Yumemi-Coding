@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import resasInfo from "@/plugins/resas.js"
+import resasInfo from "@/Plugins/resas.js"
 import axios from "axios"
 
 export default {
@@ -22,7 +22,7 @@ export default {
       url: resasInfo.url_prefectures,
       api: resasInfo.api,
       prefData: [],
-      isPref: [],
+      prefectures: [],
     }
   },
   async created() {
@@ -36,21 +36,20 @@ export default {
   },
   methods: {
     isActivePref(pref) {
-      const isExistencePref = this.isPref.indexOf(pref)
+      // チェックされてる都道府県のみを配列に入れる
+      const isExistencePref = this.prefectures.indexOf(pref)
 
       isExistencePref === -1
-        ? this.isPref.push(pref)
-        : this.isPref.splice(isExistencePref, 1)
+        ? this.prefectures.push(pref)
+        : this.prefectures.splice(isExistencePref, 1)
 
-      this.$store.dispatch("fetchPrefs", this.isPref)
+      this.$store.dispatch("fetchPrefs", this.prefectures)
     },
   },
 }
 </script>
 
 <style la="scss" scoped>
-@import url(@/assets/CSS/style.scss);
-
 .navApp {
   /* border: 2px solid red; */
 }

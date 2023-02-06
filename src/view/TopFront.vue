@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <div>都道府県別の総人口推移グラフ</div>
-    <div class="barChart">
-      <Bar :options="chartOptions" :data="chartData" />
-    </div>
+  <div class="barChart">
+    <Bar :options="chartOptions" :data="chartData" />
   </div>
 </template>
 
@@ -26,8 +23,8 @@ export default {
   computed: {
     chartData() {
       return {
-        labels: this.$store.state.year,
-        datasets: this.$store.state.resPref,
+        labels: this.$store.state.years,
+        datasets: this.$store.state.prefectures,
       }
     },
   },
