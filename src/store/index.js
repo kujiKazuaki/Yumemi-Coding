@@ -1,5 +1,6 @@
 import axios from "axios"
 import { createStore } from "vuex"
+import createPersistedState from "vuex-persistedstate"
 
 export default createStore({
   state: {
@@ -10,23 +11,22 @@ export default createStore({
     getPrefs(state, payload) {
       state.resPref = payload
       // console.log("getPrefs")
-      // console.log(payload)
+      // console.log(state.resPref)
     },
     getYears(state, payload) {
       state.year = payload
       // console.log("getYears")
-      // console.log(payload)
+      // console.log(state.year)
     },
   },
   actions: {
     fetchPrefs({ commit }, payload) {
       // payload => 各都道府県のprefCode + prefName
-      console.clear()
-      let result = []
+      // console.clear()
+      const fetchPerData = []
       // console.log(payload)
 
-      payload.forEach((el) => {
-        // console.log(el)
+      const Final = payload.map(async (el) => {
         const prefCode_data = el.prefCode
         axios
           .get(
@@ -38,41 +38,43 @@ export default createStore({
             }
           )
           .then((res) => {
-            const value = res.data.result.data[0].data
-            const fetchPramNum = []
+            // console.log(el.prefName)
+            const pram = res.data.result.data[0].data
             const fetchYear = []
-            // console.log(value)
+            const fetchPramNum = []
+
+            pram.forEach((element) => {
+              fetchPramNum.push(element.value)
+              fetchYear.push(element.year)
+            })
 
             const generateRGBA = () => {
               const r = Math.floor(Math.random() * 256)
               const g = Math.floor(Math.random() * 256)
               const b = Math.floor(Math.random() * 256)
-              const a = Math.random()
+              const a = 0.8
               return `rgba(${r}, ${g}, ${b}, ${a})`
             }
 
-            value.forEach((element) => {
-              // console.log(element)
-              fetchPramNum.push(element.value)
-              fetchYear.push(element.year)
-            })
-            // console.log(fetchYear)
-
-            console.log(payload)
             const prefData = {
-              label: payload[0].prefName,
+              label: el.prefName,
               data: fetchPramNum,
               backgroundColor: generateRGBA(),
             }
-            result.push(prefData)
-            // console.log(result)
+            fetchPerData.push(prefData)
 
-            commit("getPrefs", result)
+            commit("getPrefs", fetchPerData)
             commit("getYears", fetchYear)
           })
+          .catch((err) => {
+            console.log(err)
+          })
       })
+      // console.log(result)
+      return Final
     },
   },
+  plugins: [createPersistedState()],
   getters: {},
   modules: {},
 })

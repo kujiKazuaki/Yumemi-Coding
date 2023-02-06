@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <TopFront />
+  <div class="allApp">
     <NaviBar />
+    <TopFront />
   </div>
 </template>
 
 <script>
 import TopFront from "@/view/TopFront.vue"
-import NaviBar from "@/components/naviBar.vue"
+import NaviBar from "@/components/NaviBar.vue"
 
 export default {
   components: {
@@ -16,3 +16,5 @@ export default {
   },
 }
 </script>
+
+<style></style>

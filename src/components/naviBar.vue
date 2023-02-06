@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <!-- <div>{{ result }}</div> -->
-    <div>
-      <ul>
-        <li v-for="(pref, index) in prefData" :key="index">
-          <label>
-            <input type="checkbox" @change="isActivePref(pref)" />
-            <span>{{ pref.prefName }}</span>
-          </label>
-        </li>
-      </ul>
-    </div>
+  <div class="navApp">
+    <ul>
+      <li v-for="(pref, index) in prefData" :key="index">
+        <label>
+          <input type="checkbox" @change="isActivePref(pref)" />
+          <span>{{ pref.prefName }}</span>
+        </label>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -26,7 +23,6 @@ export default {
       api: resasInfo.api,
       prefData: [],
       isPref: [],
-      // result: "",
     }
   },
   async created() {
@@ -39,27 +35,32 @@ export default {
     })
   },
   methods: {
-    isActivePref(val) {
-      const isExistencePref = this.isPref.indexOf(val)
+    isActivePref(pref) {
+      const isExistencePref = this.isPref.indexOf(pref)
+
       isExistencePref === -1
-        ? this.isPref.push(val)
+        ? this.isPref.push(pref)
         : this.isPref.splice(isExistencePref, 1)
 
       this.$store.dispatch("fetchPrefs", this.isPref)
-      // console.log("isPref：")
-      // console.log(this.isPref)
-
-      // this.result = ""
-      // let result = []
-      // for (let i = 0; i < this.isPref.length; i++) {
-      //   result.push(this.isPref[i].prefName)
-      // }
-      // this.result = result
     },
   },
 }
 </script>
 
-<style la="scss">
+<style la="scss" scoped>
 @import url(@/assets/CSS/style.scss);
+
+.navApp {
+  /* border: 2px solid red; */
+}
+ul {
+  display: flex;
+  /* border: 2px solid blue; */
+}
+/* li {
+  border: 2px solid green;
+  margin: 2px;
+  font-size: 20px;
+} */
 </style>
