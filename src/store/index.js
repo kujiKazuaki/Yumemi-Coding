@@ -4,29 +4,27 @@ import createPersistedState from "vuex-persistedstate"
 
 export default createStore({
   state: {
-    resPref: [],
-    year: [],
+    prefectures: [],
+    years: [],
   },
   mutations: {
     getPrefs(state, payload) {
-      state.resPref = payload
+      state.prefectures = payload
       // console.log("getPrefs")
-      // console.log(state.resPref)
+      // console.log(state.prefectures)
     },
     getYears(state, payload) {
-      state.year = payload
+      state.years = payload
       // console.log("getYears")
-      // console.log(state.year)
+      // console.log(state.years)
     },
   },
   actions: {
-    fetchPrefs({ commit }, payload) {
+    getPrefectures({ commit }, payload) {
       // payload => 各都道府県のprefCode + prefName
-      // console.clear()
-      const fetchPerData = []
-      // console.log(payload)
+      const allPrefecture_Data = []
 
-      const Final = payload.map(async (el) => {
+      const result = payload.map(async (el) => {
         const prefCode_data = el.prefCode
         axios
           .get(
@@ -38,16 +36,17 @@ export default createStore({
             }
           )
           .then((res) => {
-            // console.log(el.prefName)
-            const pram = res.data.result.data[0].data
-            const fetchYear = []
-            const fetchPramNum = []
+            const value = res.data.result.data[0].data
+            const TotalPopulation_Year = []
+            const TotalPopulation_Data = []
 
-            pram.forEach((element) => {
-              fetchPramNum.push(element.value)
-              fetchYear.push(element.year)
+            // 都道府県の総人口データと年データを各配列に入れ込む
+            value.forEach((element) => {
+              TotalPopulation_Data.push(element.value)
+              TotalPopulation_Year.push(element.year)
             })
 
+            // rgbaを自動生成する関数 => backgroundColor
             const generateRGBA = () => {
               const r = Math.floor(Math.random() * 256)
               const g = Math.floor(Math.random() * 256)
@@ -56,22 +55,22 @@ export default createStore({
               return `rgba(${r}, ${g}, ${b}, ${a})`
             }
 
+            // chart.jsに入れ込むデータ
             const prefData = {
               label: el.prefName,
-              data: fetchPramNum,
+              data: TotalPopulation_Data,
               backgroundColor: generateRGBA(),
             }
-            fetchPerData.push(prefData)
+            allPrefecture_Data.push(prefData)
 
-            commit("getPrefs", fetchPerData)
-            commit("getYears", fetchYear)
+            commit("getPrefs", allPrefecture_Data)
+            commit("getYears", TotalPopulation_Year)
           })
           .catch((err) => {
             console.log(err)
           })
       })
-      // console.log(result)
-      return Final
+      return result
     },
   },
   plugins: [createPersistedState()],
