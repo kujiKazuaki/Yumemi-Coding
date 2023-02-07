@@ -20,11 +20,9 @@ export default createStore({
     },
   },
   actions: {
-    fetchPrefs({ commit }, payload) {
+    getPrefectures({ commit }, payload) {
       // payload => 各都道府県のprefCode + prefName
-      // console.clear()
       const allPrefecture_Data = []
-      // console.log(payload)
 
       const result = payload.map(async (el) => {
         const prefCode_data = el.prefCode
@@ -38,7 +36,6 @@ export default createStore({
             }
           )
           .then((res) => {
-            // console.log(el.prefName)
             const value = res.data.result.data[0].data
             const TotalPopulation_Year = []
             const TotalPopulation_Data = []

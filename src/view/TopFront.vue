@@ -1,6 +1,6 @@
 <template>
-  <div class="barChart">
-    <Bar :options="chartOptions" :data="chartData" />
+  <div class="Bar_area">
+    <Bar :options="chartOptions" :data="chartData" class="Bar_item" />
   </div>
 </template>
 
@@ -31,8 +31,20 @@ export default {
 }
 </script>
 
-<style scope>
-.barChart {
-  width: 110%;
+<style lang="scss" scoped>
+.Bar_area {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  width: 100%;
+  height: 650px;
+  margin: 0 auto;
+  margin-top: 1.2rem;
+  padding: 0.5rem;
+
+  .Bar_item {
+    margin: 0 auto;
+    width: 1000px;
+  }
 }
 </style>

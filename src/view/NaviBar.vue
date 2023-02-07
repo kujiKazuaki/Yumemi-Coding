@@ -1,10 +1,10 @@
 <template>
   <div class="navApp">
     <ul>
-      <li v-for="(pref, index) in prefData" :key="index">
+      <li v-for="(pref, index) in prefData" :key="index" class="pref_itemBox">
         <label>
-          <input type="checkbox" @change="isActivePref(pref)" />
-          <span>{{ pref.prefName }}</span>
+          <input type="checkbox" @change="checkItem(pref)" />
+          <span class="pref_text">{{ pref.prefName }}</span>
         </label>
       </li>
     </ul>
@@ -35,7 +35,7 @@ export default {
     })
   },
   methods: {
-    isActivePref(pref) {
+    checkItem(pref) {
       // チェックされてる都道府県のみを配列に入れる
       const isExistencePref = this.prefectures.indexOf(pref)
 
@@ -43,23 +43,44 @@ export default {
         ? this.prefectures.push(pref)
         : this.prefectures.splice(isExistencePref, 1)
 
-      this.$store.dispatch("fetchPrefs", this.prefectures)
+      this.$store.dispatch("getPrefectures", this.prefectures)
     },
   },
 }
 </script>
 
-<style la="scss" scoped>
+<style lang="scss" scoped>
 .navApp {
-  /* border: 2px solid red; */
+  ul {
+    display: flex;
+    border: 2px solid rgb(155, 154, 154);
+    border-radius: 10px;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.6rem auto;
+    margin-top: 1.2rem;
+    padding: 1.2rem;
+
+    .pref_itemBox {
+      padding: 5px;
+
+      &:hover {
+        background-color: rgb(224, 224, 224);
+        text-decoration: underline;
+      }
+
+      label {
+        cursor: pointer;
+
+        .pref_text {
+          margin-left: 2px;
+        }
+      }
+    }
+  }
 }
-ul {
-  display: flex;
-  /* border: 2px solid blue; */
-}
-/* li {
-  border: 2px solid green;
-  margin: 2px;
-  font-size: 20px;
-} */
 </style>

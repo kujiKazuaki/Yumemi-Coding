@@ -33,7 +33,7 @@ export default {
 @import url(@/assets/CSS/reset.scss);
 .allContainer {
   min-height: 100vh;
-  /* border: 2px solid red; */
+  background-color: rgb(255, 252, 249);
   position: relative;
 
   .Footer {
@@ -41,6 +41,12 @@ export default {
     width: 100%;
     position: absolute;
     bottom: 0;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .allContainer {
+    min-width: 1000px;
   }
 }
 </style>
