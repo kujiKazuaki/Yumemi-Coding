@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import resasInfo from "@/Plugins/resas.js"
+import resasInfo from "@/library/resas.js"
 import axios from "axios"
 
 export default {
