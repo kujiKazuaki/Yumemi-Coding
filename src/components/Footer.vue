@@ -1,5 +1,7 @@
 <template>
-  <div class="all"><p>©2023 Kazuaki Kuji.</p></div>
+  <div class="all">
+    <!-- <p>©2023 Kazuaki Kuji.</p> -->
+  </div>
 </template>
 
 <style lang="scss" scoped>

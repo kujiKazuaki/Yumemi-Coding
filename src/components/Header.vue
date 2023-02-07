@@ -1,5 +1,7 @@
 <template>
-  <div class="all"><p>ゆめみ コーディング試験</p></div>
+  <div class="all">
+    <!-- <p>ゆめみ コーディング試験</p> -->
+  </div>
 </template>
 
 <style lang="scss" scoped>
