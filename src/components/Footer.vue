@@ -1,6 +1,6 @@
 <template>
   <div class="all">
-    <!-- <p>©2023 Kazuaki Kuji.</p> -->
+    <p>©2023 Kazuaki Kuji.</p>
   </div>
 </template>
 

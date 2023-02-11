@@ -10,13 +10,9 @@ export default createStore({
   mutations: {
     getPrefs(state, payload) {
       state.prefectures = payload
-      // console.log("getPrefs")
-      // console.log(state.prefectures)
     },
     getYears(state, payload) {
       state.years = payload
-      // console.log("getYears")
-      // console.log(state.years)
     },
   },
   actions: {

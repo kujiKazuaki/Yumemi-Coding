@@ -1,6 +1,6 @@
 <template>
   <div class="all">
-    <!-- <p>ゆめみ コーディング試験</p> -->
+    <p>ゆめみ コーディング試験</p>
   </div>
 </template>
 
