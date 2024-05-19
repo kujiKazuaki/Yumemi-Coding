@@ -31,7 +31,6 @@ export default {
     }
     await axios.get(this.url, request_Header).then((res) => {
       const value = res.data.result
-      console.log("value", value)
       this.prefData.push(...value)
     })
   },
