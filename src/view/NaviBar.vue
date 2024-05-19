@@ -31,11 +31,13 @@ export default {
     }
     await axios.get(this.url, request_Header).then((res) => {
       const value = res.data.result
+      console.log("value", value)
       this.prefData.push(...value)
     })
   },
   methods: {
     checkItem(pref) {
+      console.clear()
       // チェックされてる都道府県のみを配列に入れる
       const isExistencePref = this.prefectures.indexOf(pref)
 

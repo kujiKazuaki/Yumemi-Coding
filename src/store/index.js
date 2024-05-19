@@ -10,6 +10,7 @@ export default createStore({
   mutations: {
     getPrefs(state, payload) {
       state.prefectures = payload
+      // console.log(state.prefectures)
     },
     getYears(state, payload) {
       state.years = payload
@@ -19,20 +20,22 @@ export default createStore({
     getPrefectures({ commit }, payload) {
       // payload => 各都道府県のprefCode + prefName
       const allPrefecture_Data = []
+      const allPrefectureYears_Data = []
 
-      const result = payload.map(async (el) => {
+      payload.forEach(async (el) => {
         const prefCode_data = el.prefCode
-        axios
+        await axios
           .get(
             `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${prefCode_data}&cityCode=-`,
             {
               headers: {
-                "X-API-KEY": "5RDiLdZKag8c3NXpEMb1FcPQEIY3GVwgQwbLqFIx",
+                "X-API-KEY": "3xJ30Q5E9QI9Ci2hRdcvWrAxsBVizaErafAXNImN",
               },
             }
           )
           .then((res) => {
             const value = res.data.result.data[0].data
+            console.log("value", value)
             const TotalPopulation_Year = []
             const TotalPopulation_Data = []
 
@@ -58,15 +61,15 @@ export default createStore({
               backgroundColor: generateRGBA(),
             }
             allPrefecture_Data.push(prefData)
-
-            commit("getPrefs", allPrefecture_Data)
-            commit("getYears", TotalPopulation_Year)
+            allPrefectureYears_Data.push(TotalPopulation_Year)
           })
           .catch((err) => {
             console.log(err)
           })
       })
-      return result
+      console.log(allPrefecture_Data)
+      commit("getPrefs", allPrefecture_Data)
+      commit("getYears", allPrefectureYears_Data)
     },
   },
   plugins: [createPersistedState()],
